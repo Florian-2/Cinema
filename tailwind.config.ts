@@ -54,6 +54,12 @@ module.exports = {
 						lineHeight: "1.85rem",
 					},
 				],
+				base: [
+					"1rem",
+					{
+						lineHeight: "1.25rem",
+					},
+				],
 			},
 			borderRadius: {
 				lg: "var(--radius)",

@@ -21,7 +21,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					enableSystem
 				>
 					<Header />
-					{children}
+
+					<main className="flex flex-col gap-14 max-w-screen-2xl mx-auto mt-14">{children}</main>
 				</ThemeProvider>
 			</body>
 		</html>

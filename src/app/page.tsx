@@ -8,12 +8,12 @@ export default async function Home() {
 	const movie = await getMedias<Movie>(`/movie/575264`);
 
 	return (
-		<main className="flex flex-col gap-14 max-w-screen-2xl mx-auto mt-14">
+		<>
 			<HeroSection movie={movie} />
 
 			<PopularMovies />
 
 			<PopularSeries />
-		</main>
+		</>
 	);
 }

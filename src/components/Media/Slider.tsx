@@ -5,6 +5,7 @@ import "react-alice-carousel/lib/alice-carousel.css";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Skeleton } from "../ui/skeleton";
 
 const responsive = {
 	0: {
@@ -29,7 +30,14 @@ export function Slider({ data }: { data: JSX.Element[] }) {
 	}, []);
 
 	if (!mounted) {
-		return <p>Chargement...</p>;
+		return (
+			<div className="h-[420px] flex gap-5">
+				<Skeleton className="flex-grow shadow-sm" />
+				<Skeleton className="hidden flex-grow shadow-sm sm:inline-flex" />
+				<Skeleton className="hidden flex-grow shadow-sm md:inline-flex" />
+				<Skeleton className="hidden flex-grow shadow-sm xl:inline-flex" />
+			</div>
+		);
 	}
 
 	const prevBtn = () => {

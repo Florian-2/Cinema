@@ -4,6 +4,7 @@ import { Rating } from "./Rating";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { formatDate } from "@/lib/date";
+import { Overlay } from "./Overlay";
 
 type Props = {
 	media: MovieLight;
@@ -16,14 +17,14 @@ export function MovieCard({ media, className }: Props) {
 
 	return (
 		<article className={`h-[400px] relative rounded-3xl overflow-hidden ${className ? className : ""}`}>
-			<div className="absolute z-10 w-full h-full before:block before:absolute before:z-50 before:top-0 before:left-0 before:w-full before:h-full before:bg-black/20">
+			<Overlay>
 				<Image
 					src={backgroundImg}
 					alt={media.title}
 					fill
 					objectFit="cover"
 				/>
-			</div>
+			</Overlay>
 
 			<div className="w-full absolute bottom-0 z-20 p-4 text-white bg-gradient-overlay">
 				<h3 className="text-2xl font-medium">{media.title}</h3>
