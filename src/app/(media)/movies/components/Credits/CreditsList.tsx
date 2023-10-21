@@ -13,7 +13,7 @@ export async function CreditsList({ movieId }: Props) {
 	const credits = cast.filter((person) => person.known_for_department === "Acting");
 
 	return (
-		<div className="flex items-center gap-7 overflow-x-auto">
+		<div className="flex items-center gap-5 justify-between overflow-x-auto">
 			{credits.slice(0, 10).map((credit) => (
 				<Credit
 					key={credit.id}
@@ -21,7 +21,7 @@ export async function CreditsList({ movieId }: Props) {
 				/>
 			))}
 
-			{credits.length > 10 && <MoreCredit credits={credits} />}
+			{credits.length > 7 && <MoreCredit credits={credits} />}
 		</div>
 	);
 }
