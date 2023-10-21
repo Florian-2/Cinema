@@ -3,7 +3,6 @@ type SearchParams = {
 	value: string;
 }[];
 
-// Voir si on peux utiliser les type générique pour typé le retour de la fonction
 export async function getMedias<T>(path: string, params: SearchParams = []): Promise<T> {
 	try {
 		if (typeof process.env.TMDB_API_URL === "undefined" || typeof process.env.TMDB_API_KEY === "undefined") {
@@ -26,6 +25,8 @@ export async function getMedias<T>(path: string, params: SearchParams = []): Pro
 		}
 
 		const data = await res.json();
+
+		// return new Promise((res) => setTimeout(() => res(data), 3000));
 
 		return data;
 	} catch (e) {

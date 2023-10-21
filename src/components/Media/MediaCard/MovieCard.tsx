@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Rating } from "./Rating";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { formatDate } from "@/lib/date";
+import { formatDate } from "@/lib/time";
 import { Overlay } from "./Overlay";
 
 type Props = {

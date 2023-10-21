@@ -7,7 +7,13 @@ import { Trailer } from "@/components/Media/Trailer";
 import { Overlay } from "@/components/Media/MediaCard";
 import { Movie } from "@/interfaces";
 import { getMedias } from "@/services";
-import { formatDate } from "@/lib/date";
+import { convertRuntime, formatDate } from "@/lib/time";
+import { CreditsList } from "../components/Credits/CreditsList";
+import { SkeletonCredit } from "@/components/Skeletons/SkeletonCredits";
+import { HeaderSection } from "@/components/Media/HeaderSection";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { DialogTrigger } from "@radix-ui/react-dialog";
 
 export default async function MoviesPage({ params }: { params: { id: string } }) {
 	let movie: Movie;
@@ -35,11 +41,11 @@ export default async function MoviesPage({ params }: { params: { id: string } })
 						fill
 						layout="fill"
 						draggable={false}
-						objectFit="cover"
+						className="object-cover"
 					/>
 				</Overlay>
 
-				<div className="flex-grow relative z-20 w-full h-full p-5 flex text-white bg-gradient-overlay md:px-8 lg:px-10 md:flex-row md:gap-8 lg:gap-10 md:items-center md:justify-center">
+				<div className="flex-grow relative z-20 w-full h-full p-6 flex text-white bg-gradient-overlay md:px-8 lg:px-10 md:flex-row md:gap-8 lg:gap-10 md:items-center md:justify-center">
 					<div className="flex-shrink-0">
 						<Image
 							src={`${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_PATH}/w300/${movie.poster_path}`}
@@ -52,7 +58,12 @@ export default async function MoviesPage({ params }: { params: { id: string } })
 
 					<div className="w-full min-h-full flex flex-col gap-5 ">
 						<div>
-							<h1 className="text-3xl font-semibold">{movie.title}</h1>
+							<h1 className="text-3xl leading-tight font-semibold ">
+								{movie.title}
+								<span className="ml-2 text-base align-middle font-normal">
+									- {convertRuntime(movie.runtime)}
+								</span>
+							</h1>
 							<p className="text-sm">{formatDate(movie.release_date, "long")}</p>
 						</div>
 
@@ -87,6 +98,16 @@ export default async function MoviesPage({ params }: { params: { id: string } })
 						)}
 					</div>
 				</div>
+			</section>
+
+			<section>
+				<HeaderSection>
+					<h2 className="text-1.5xl font-medium">Casting</h2>
+				</HeaderSection>
+
+				<Suspense fallback={<SkeletonCredit element={7} />}>
+					<CreditsList movieId={movie.id} />
+				</Suspense>
 			</section>
 		</>
 	);

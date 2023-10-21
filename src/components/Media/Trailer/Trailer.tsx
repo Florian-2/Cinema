@@ -26,7 +26,7 @@ export async function Trailer({ ytId }: Props) {
 				<Button
 					onClick={handleClick}
 					variant={"white"}
-					className="gap-2 "
+					className="gap-2"
 				>
 					<span className="text-base">Bande-annonce</span>
 					<Play size={17} />

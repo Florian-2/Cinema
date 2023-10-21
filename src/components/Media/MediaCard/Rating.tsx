@@ -18,7 +18,7 @@ export function Rating({ rating, votes, sizeIcon }: Props) {
 				width={sizeIcon}
 			/>
 
-			<p className="text-xs">
+			<p className="text-sm">
 				{ratingFormat} note {votes && `| ${votes} votes`}
 			</p>
 		</div>

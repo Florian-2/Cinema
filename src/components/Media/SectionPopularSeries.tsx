@@ -8,7 +8,6 @@ import { MediaCard } from "./MediaCard/MediaCard";
 export async function PopularSeries() {
 	const data = await getMedias<{ results: SerieLight[] }>("/tv/popular");
 	const series = data.results.splice(0, 10);
-	console.log(series);
 
 	const seriesElement = series.map((media) => (
 		<MediaCard

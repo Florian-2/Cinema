@@ -1,4 +1,3 @@
-// ---------------- MOVIE DETAILS ---------------------
 export interface MovieLight {
 	adult: boolean;
 	backdrop_path: string | null;
@@ -51,7 +50,6 @@ export interface Movie extends MovieLight {
 	tagline: string;
 }
 
-// ---------------- MOVIE DETAILS ---------------------
 export interface SerieLight {
 	backdrop_path: string | null;
 	first_air_date: string;
@@ -141,4 +139,18 @@ export interface Serie extends SerieLight {
 	}>;
 	status: string;
 	type: string;
+}
+
+export interface Credit {
+	gender: number;
+	id: number;
+	known_for_department: string;
+	name: string;
+	original_name: string;
+	popularity: number;
+	profile_path?: string;
+	cast_id: number;
+	character: string;
+	credit_id: string;
+	order: number;
 }
