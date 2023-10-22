@@ -21,7 +21,7 @@ export async function CreditsList({ movieId }: Props) {
 				/>
 			))}
 
-			{credits.length > 7 && <MoreCredit credits={credits} />}
+			{credits.length > 10 && <MoreCredit credits={credits} />}
 		</div>
 	);
 }

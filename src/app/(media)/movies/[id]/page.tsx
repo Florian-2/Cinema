@@ -11,9 +11,6 @@ import { convertRuntime, formatDate } from "@/lib/time";
 import { CreditsList } from "../components/Credits/CreditsList";
 import { SkeletonCredit } from "@/components/Skeletons/SkeletonCredits";
 import { HeaderSection } from "@/components/Media/HeaderSection";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { DialogTrigger } from "@radix-ui/react-dialog";
 
 export default async function MoviesPage({ params }: { params: { id: string } }) {
 	let movie: Movie;

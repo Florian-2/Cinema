@@ -9,7 +9,7 @@ export function Credit({ person }: Props) {
 	const thumbnail = `${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_PATH}/w185${person.profile_path}`;
 
 	return (
-		<div className="max-w-[130px] flex flex-col items-center gap-2">
+		<div className="flex-shrink-0 max-w-[130px] flex flex-col items-center gap-2">
 			{person.profile_path ? (
 				<Image
 					src={thumbnail}

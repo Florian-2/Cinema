@@ -1,44 +1,44 @@
 "use client";
 
-import { useState } from "react";
-import { YoutubeVideo } from "./YoutubeVideo";
-import { Play } from "lucide-react";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
-
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTrigger } from "@/components/ui/dialog";
+import { Play } from "lucide-react";
 type Props = {
 	ytId: string;
 };
 
 export async function Trailer({ ytId }: Props) {
-	const [show, setShow] = useState(false);
-	const [loaded, setLoaded] = useState(false);
-
-	function handleClick() {
-		if (show) return;
-
-		setShow(!show);
-		setLoaded(true);
-	}
-
 	return (
-		<div className="">
-			{!show && (
+		<Dialog>
+			<DialogTrigger asChild>
 				<Button
-					onClick={handleClick}
 					variant={"white"}
-					className="gap-2"
+					className="self-start gap-2"
 				>
 					<span className="text-base">Bande-annonce</span>
 					<Play size={17} />
 				</Button>
-			)}
+			</DialogTrigger>
 
-			{show && loaded && (
-				<YoutubeVideo
-					id={ytId}
-					onClose={() => setShow(false)}
-				/>
-			)}
-		</div>
+			<DialogContent className="max-w-6xl h-max">
+				<DialogHeader>
+					<DialogDescription>
+						<AspectRatio
+							ratio={16 / 9}
+							className="mt-3"
+						>
+							<iframe
+								src={`https://www.youtube.com/embed/${ytId}`}
+								title="YouTube video player"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+								allowFullScreen
+								className="border-none rounded-lg w-full h-full"
+							></iframe>
+						</AspectRatio>
+					</DialogDescription>
+				</DialogHeader>
+			</DialogContent>
+		</Dialog>
 	);
 }
