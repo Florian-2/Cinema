@@ -6,7 +6,6 @@ import { Trailer } from "@/components/Media/Trailer";
 import { Overlay } from "@/components/Media/MediaCard";
 import { Serie } from "@/interfaces";
 import { getMedias } from "@/services";
-import { formatDate } from "@/lib/time";
 import { CreditsList } from "@/components/Media/Credits/CreditsList";
 import { SkeletonCredit } from "@/components/Skeletons/SkeletonCredits";
 import { Genres } from "@/components/Media/Genres";
@@ -14,6 +13,11 @@ import { Description } from "@/components/Media/Description";
 import { HeaderSection } from "@/components/Media/Section";
 import { SectionRecommendations } from "@/components/Media/Section";
 import { TitleSection } from "@/components/Media/Section";
+import { SectionContainer } from "../../components/SectionContainer";
+import { Presentation } from "../../components/Prensations";
+import { Thumbnail } from "@/components/Media/Thumbnail";
+import { PresentationHeader } from "../../components/PrensationHeader";
+import { PresentationContent } from "../../components/PresantationContent";
 
 export default async function SeriePage({ params }: { params: { id: string } }) {
 	let serie: Serie;
@@ -35,7 +39,7 @@ export default async function SeriePage({ params }: { params: { id: string } }) 
 
 	return (
 		<>
-			<section className="flex flex-col relative shadow-xl rounded-2xl overflow-hidden h-full md:min-h-[500px]">
+			<SectionContainer>
 				<Overlay>
 					<Image
 						src={`${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_PATH}/original/${serie.backdrop_path}`}
@@ -47,24 +51,19 @@ export default async function SeriePage({ params }: { params: { id: string } }) 
 					/>
 				</Overlay>
 
-				<div className="flex-grow relative z-20 w-full h-full p-6 flex text-white bg-gradient-overlay md:px-8 lg:px-10 md:flex-row md:gap-8 lg:gap-10 md:items-center md:justify-center">
-					<div className="flex-shrink-0">
-						<Image
-							src={`${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_PATH}/w300/${serie.poster_path}`}
+				<Presentation>
+					{serie.poster_path && (
+						<Thumbnail
+							url={serie.poster_path}
 							alt={serie.name}
-							width={250}
-							height={400}
-							className="hidden md:block md:rounded-lg"
 						/>
-					</div>
+					)}
 
-					<div className="w-full min-h-full flex flex-col gap-5 ">
-						<div className="flex flex-col">
-							<h1 className="text-3xl leading-tight font-semibold ">{serie.name}</h1>
-							<p className="text-sm self-start cursor-default">
-								{formatDate(serie.first_air_date, "long")} (saison 1)
-							</p>
-						</div>
+					<PresentationContent>
+						<PresentationHeader
+							title={serie.name}
+							releaseDate={serie.first_air_date}
+						/>
 
 						<Rating
 							rating={serie.vote_average}
@@ -84,9 +83,9 @@ export default async function SeriePage({ params }: { params: { id: string } }) 
 								{trailer && <Trailer ytId={trailer.key} />}
 							</Suspense>
 						)}
-					</div>
-				</div>
-			</section>
+					</PresentationContent>
+				</Presentation>
+			</SectionContainer>
 
 			<section>
 				<HeaderSection>

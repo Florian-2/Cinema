@@ -6,7 +6,6 @@ import { Trailer } from "@/components/Media/Trailer";
 import { Overlay } from "@/components/Media/MediaCard";
 import { Movie, ReleaseDates } from "@/interfaces";
 import { getMedias } from "@/services";
-import { convertRuntime, formatDate } from "@/lib/time";
 import { CreditsList } from "@/components/Media/Credits";
 import { SkeletonCredit } from "@/components/Skeletons/SkeletonCredits";
 import { Description } from "@/components/Media/Description";
@@ -15,6 +14,10 @@ import { Thumbnail } from "@/components/Media/Thumbnail";
 import { HeaderSection } from "@/components/Media/Section";
 import { SectionRecommendations } from "@/components/Media/Section";
 import { TitleSection } from "@/components/Media/Section";
+import { SectionContainer } from "../../components/SectionContainer";
+import { Presentation } from "../../components/Prensations";
+import { PresentationContent } from "../../components/PresantationContent";
+import { PresentationHeader } from "../../components/PrensationHeader";
 
 export default async function MoviesPage({ params }: { params: { id: string } }) {
 	let movie: Movie;
@@ -34,14 +37,12 @@ export default async function MoviesPage({ params }: { params: { id: string } })
 		const releaseDates = data[2].results.find((date) => date.iso_3166_1 === "FR");
 		releaseDatesFr = releaseDates?.release_dates[0].release_date || movie.release_date;
 	} catch (error) {
-		console.log(error);
-
 		notFound();
 	}
 
 	return (
 		<>
-			<section className="flex flex-col relative shadow-xl rounded-2xl overflow-hidden h-full md:min-h-[500px]">
+			<SectionContainer>
 				<Overlay>
 					<Image
 						src={`${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_PATH}/original/${movie.backdrop_path}`}
@@ -53,7 +54,7 @@ export default async function MoviesPage({ params }: { params: { id: string } })
 					/>
 				</Overlay>
 
-				<div className="flex-grow relative z-20 w-full h-full p-6 flex text-white bg-gradient-overlay md:px-8 lg:px-10 md:flex-row md:gap-8 lg:gap-10 md:items-center md:justify-center">
+				<Presentation>
 					{movie.poster_path && (
 						<Thumbnail
 							url={movie.poster_path}
@@ -61,17 +62,12 @@ export default async function MoviesPage({ params }: { params: { id: string } })
 						/>
 					)}
 
-					<div className="w-full min-h-full flex flex-col gap-5 ">
-						<div>
-							<h1 className="text-3xl leading-tight font-semibold ">
-								{movie.title}
-								<span className="ml-2 text-sm align-middle font-normal">
-									- {convertRuntime(movie.runtime)}
-								</span>
-							</h1>
-
-							<p className="text-sm">{formatDate(releaseDatesFr, "long")}</p>
-						</div>
+					<PresentationContent>
+						<PresentationHeader
+							title={movie.title}
+							releaseDate={releaseDatesFr}
+							runtime={movie.runtime}
+						/>
 
 						<Rating
 							rating={movie.vote_average}
@@ -91,9 +87,9 @@ export default async function MoviesPage({ params }: { params: { id: string } })
 								{trailer && <Trailer ytId={trailer.key} />}
 							</Suspense>
 						)}
-					</div>
-				</div>
-			</section>
+					</PresentationContent>
+				</Presentation>
+			</SectionContainer>
 
 			<section>
 				<HeaderSection>

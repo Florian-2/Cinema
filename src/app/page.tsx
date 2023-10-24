@@ -1,4 +1,4 @@
-import { HeroSection } from "../components/Media/Section/Hero";
+import { HeroSection } from "../components/Media/Section";
 import { PopularMovies } from "@/components/Media/Section/SectionPopularMovies";
 import { PopularSeries } from "@/components/Media/Section/SectionPopularSeries";
 

@@ -3,3 +3,4 @@ export * from "./TitleSection";
 export * from "./SectionPopularMovies";
 export * from "./SectionPopularSeries";
 export * from "./SectionRecommendations";
+export * from "./Hero";
