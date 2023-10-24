@@ -16,7 +16,7 @@ type Props = {
 	credits: CreditInterface[];
 };
 
-export function MoreCredit({ credits }: Props) {
+export function MoreCredits({ credits }: Props) {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
@@ -27,14 +27,14 @@ export function MoreCredit({ credits }: Props) {
 				<DialogHeader>
 					<DialogTitle className="mb-3">Casting complet</DialogTitle>
 
-					<DialogDescription className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+					<div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
 						{credits.map((person) => (
 							<Credit
 								key={person.id}
 								person={person}
 							/>
 						))}
-					</DialogDescription>
+					</div>
 				</DialogHeader>
 			</DialogContent>
 		</Dialog>

@@ -1,4 +1,4 @@
-type SearchParams = {
+export type SearchParams = {
 	key: string;
 	value: string;
 }[];
@@ -6,12 +6,13 @@ type SearchParams = {
 export async function getMedias<T>(path: string, params: SearchParams = []): Promise<T> {
 	try {
 		if (typeof process.env.TMDB_API_URL === "undefined" || typeof process.env.TMDB_API_KEY === "undefined") {
-			throw new Error("Récupération des données impossible.");
+			throw new Error("Erreur variables d'environnement.");
 		}
 
 		const url = new URL(`${process.env.TMDB_API_URL}${path}`);
 		url.searchParams.append("api_key", process.env.TMDB_API_KEY);
 		url.searchParams.append("language", "fr-FR");
+		url.searchParams.append("region", "fr");
 
 		params
 			.filter((param) => param.value)
@@ -30,6 +31,8 @@ export async function getMedias<T>(path: string, params: SearchParams = []): Pro
 
 		return data;
 	} catch (e) {
+		console.log(e);
+
 		throw e;
 	}
 }

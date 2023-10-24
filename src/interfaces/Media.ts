@@ -14,7 +14,6 @@ export interface MovieLight {
 	vote_average: number;
 	vote_count: number;
 }
-
 export interface Movie extends MovieLight {
 	belongs_to_collection: {
 		id: number;
@@ -50,10 +49,33 @@ export interface Movie extends MovieLight {
 	tagline: string;
 }
 
+export enum Release {
+	Premiere = 1,
+	TheatricalLiminted = 2,
+	Theatrical = 3,
+	Digital = 4,
+	Physical = 5,
+	TV = 6,
+}
+export interface ReleaseDate {
+	certification: string;
+	descriptors: [];
+	iso_639_1: string;
+	note: string;
+	release_date: Date;
+	type: Release;
+}
+export interface ReleaseDates {
+	iso_3166_1: string;
+	release_dates: ReleaseDate[];
+}
 export interface SerieLight {
 	backdrop_path: string | null;
 	first_air_date: string;
-	genre_ids: number[];
+	genres: {
+		id: number;
+		name: string;
+	}[];
 	id: number;
 	name: string;
 	origin_country: string[];
@@ -67,7 +89,7 @@ export interface SerieLight {
 }
 
 export interface Serie extends SerieLight {
-	adult: boolean;
+	tagline?: string;
 	created_by: Array<{
 		id: number;
 		credit_id: string;
@@ -103,7 +125,7 @@ export interface Serie extends SerieLight {
 		season_number: number;
 		show_id: number;
 		still_path: string | null;
-	};
+	} | null;
 	networks: Array<{
 		id: number;
 		logo_path: string | null;

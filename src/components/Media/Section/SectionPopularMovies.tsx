@@ -2,8 +2,9 @@ import { MovieLight } from "@/interfaces";
 import { getMedias } from "@/services";
 import { HeaderSection } from "./HeaderSection";
 import Link from "next/link";
-import { Slider } from "./Slider";
-import { MediaCard } from "./MediaCard/MediaCard";
+import { Slider } from "../Slider";
+import { MediaCard } from "../MediaCard/MediaCard";
+import { TitleSection } from "./TitleSection";
 
 export async function PopularMovies() {
 	const data = await getMedias<{ results: MovieLight[] }>("/movie/popular");
@@ -21,7 +22,8 @@ export async function PopularMovies() {
 	return (
 		<section>
 			<HeaderSection>
-				<h2 className="text-1.5xl font-medium">Les films du moment</h2>
+				<TitleSection>Les films du moment</TitleSection>
+
 				<Link
 					href="/movies"
 					className="text-sm underline"

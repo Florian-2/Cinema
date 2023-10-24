@@ -69,6 +69,9 @@ module.exports = {
 			backgroundImage: {
 				"gradient-overlay": "linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9))",
 			},
+			objectPosition: {
+				"center-top": "50% 30%",
+			},
 			keyframes: {
 				"accordion-down": {
 					from: { height: 0 },

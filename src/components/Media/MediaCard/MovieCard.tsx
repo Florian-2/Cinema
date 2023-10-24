@@ -18,12 +18,15 @@ export function MovieCard({ media, className }: Props) {
 	return (
 		<article className={`h-[400px] relative rounded-3xl overflow-hidden ${className ? className : ""}`}>
 			<Overlay>
-				<Image
-					src={backgroundImg}
-					alt={media.title}
-					fill
-					objectFit="cover"
-				/>
+				{media.poster_path && (
+					<Image
+						src={backgroundImg}
+						alt={media.title}
+						fill
+						className="object-cover"
+						sizes=""
+					/>
+				)}
 			</Overlay>
 
 			<div className="w-full absolute bottom-0 z-20 p-4 text-white bg-gradient-overlay">

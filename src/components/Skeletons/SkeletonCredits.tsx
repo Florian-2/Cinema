@@ -1,11 +1,11 @@
 import { Skeleton } from "../ui/skeleton";
 
 type Props = {
-	element: number;
+	elements: number;
 };
 
-export function SkeletonCredit({ element }: Props) {
-	const skeletonElements = Array.from({ length: element });
+export function SkeletonCredit({ elements }: Props) {
+	const skeletonElements = Array.from({ length: elements });
 
 	return (
 		<div className="overflow-x-auto flex gap-7">

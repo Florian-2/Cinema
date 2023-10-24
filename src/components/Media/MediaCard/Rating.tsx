@@ -9,6 +9,7 @@ type Props = {
 
 export function Rating({ rating, votes, sizeIcon }: Props) {
 	const ratingFormat = Math.round(rating * 10) / 10; // 7.236 => 7.2
+	const intl = new Intl.NumberFormat("fr");
 
 	return (
 		<div className="flex items-center gap-2">
@@ -19,7 +20,7 @@ export function Rating({ rating, votes, sizeIcon }: Props) {
 			/>
 
 			<p className="text-sm">
-				{ratingFormat} note {votes && `| ${votes} votes`}
+				{ratingFormat} note {votes && `| ${intl.format(votes)} votes`}
 			</p>
 		</div>
 	);
