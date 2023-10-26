@@ -1,9 +1,9 @@
-import { Movie, Serie } from "@/interfaces";
+import { Movie, Serie } from "@/shared/interfaces";
 import { SearchParams, getMedias } from "@/services";
 import { HeaderSection } from "./HeaderSection";
 import { MediaCard } from "../MediaCard";
 import { Slider } from "../Slider";
-import { subtractDate } from "@/lib/time";
+import { subYears } from "date-fns";
 import { TitleSection } from "./TitleSection";
 
 type Props = {
@@ -17,7 +17,7 @@ export async function SectionRecommendations({ media, type }: Props) {
 		.slice(0, 3)
 		.join(",");
 	const params: SearchParams = [
-		{ key: "primary_release_date.gte", value: subtractDate(10, "year") },
+		{ key: "primary_release_date.gte", value: subYears(new Date(), 10).toJSON() },
 		{ key: "watch_region", value: "fr" },
 		{ key: "vote_average.gte", value: "6" },
 		{ key: "vote_count.gte", value: "200" },

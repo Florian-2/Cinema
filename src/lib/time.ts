@@ -16,21 +16,3 @@ export function convertRuntime(time: number): string {
 
 	return `${hours}h ${minutes}m`;
 }
-
-export function subtractDate(subtract: number, type: "year" | "month") {
-	const limitDate = new Date();
-
-	switch (type) {
-		case "year":
-			limitDate.setFullYear(limitDate.getFullYear() - subtract);
-			break;
-		case "month":
-			limitDate.setMonth(limitDate.getMonth() - subtract);
-			break;
-
-		default:
-			break;
-	}
-
-	return limitDate.toJSON();
-}

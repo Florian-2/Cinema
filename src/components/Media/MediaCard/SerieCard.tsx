@@ -1,4 +1,4 @@
-import { SerieLight } from "@/interfaces";
+import { SerieLight } from "@/shared/interfaces";
 import Image from "next/image";
 import { Rating } from "./Rating";
 import { Button } from "@/components/ui/button";

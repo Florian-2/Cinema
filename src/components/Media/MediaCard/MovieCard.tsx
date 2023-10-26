@@ -1,4 +1,4 @@
-import { MovieLight } from "@/interfaces";
+import { MovieLight } from "@/shared/interfaces";
 import Image from "next/image";
 import { Rating } from "./Rating";
 import { Button } from "@/components/ui/button";

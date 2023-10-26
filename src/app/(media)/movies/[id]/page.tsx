@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { Rating } from "@/components/Media/MediaCard/Rating";
 import { Trailer } from "@/components/Media/Trailer";
 import { Overlay } from "@/components/Media/MediaCard";
-import { Movie, ReleaseDates } from "@/interfaces";
+import { Movie, ReleaseDates } from "@/shared/interfaces";
 import { getMedias } from "@/services";
 import { CreditsList } from "@/components/Media/Credits";
 import { SkeletonCredit } from "@/components/Skeletons/SkeletonCredits";

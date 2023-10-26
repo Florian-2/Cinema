@@ -1,4 +1,4 @@
-import { SerieLight } from "@/interfaces";
+import { SerieLight } from "@/shared/interfaces";
 import { SearchParams, getMedias } from "@/services";
 import { HeaderSection } from "./HeaderSection";
 import Link from "next/link";

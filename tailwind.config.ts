@@ -72,6 +72,9 @@ module.exports = {
 			objectPosition: {
 				"center-top": "50% 30%",
 			},
+			gridTemplateColumns: {
+				"20/100": "minmax(200px, 0.22fr) 1fr",
+			},
 			keyframes: {
 				"accordion-down": {
 					from: { height: 0 },

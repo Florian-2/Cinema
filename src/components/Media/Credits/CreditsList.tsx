@@ -1,4 +1,4 @@
-import { Credit as CreditInterface } from "@/interfaces";
+import { Credit as CreditInterface } from "@/shared/interfaces";
 import { getMedias } from "@/services/media.services";
 import { Credit } from "./Credit";
 import { MoreCredits } from "./MoreCredits";

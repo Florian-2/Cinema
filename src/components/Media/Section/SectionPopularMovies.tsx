@@ -1,4 +1,4 @@
-import { MovieLight } from "@/interfaces";
+import { MovieLight } from "@/shared/interfaces";
 import { getMedias } from "@/services";
 import { HeaderSection } from "./HeaderSection";
 import Link from "next/link";

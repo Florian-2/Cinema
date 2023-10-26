@@ -1,5 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Serie } from "@/interfaces";
+import { Serie } from "@/shared/interfaces";
 
 type Props = {
 	serie: Serie;

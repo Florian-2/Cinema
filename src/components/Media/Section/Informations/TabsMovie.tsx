@@ -1,5 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Movie } from "@/interfaces";
+import { Movie } from "@/shared/interfaces";
 import { formatCurrency } from "@/lib/number";
 import { getMedias } from "@/services";
 import { ExternalLink } from "lucide-react";

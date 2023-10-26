@@ -1,4 +1,4 @@
-import { MovieLight, SerieLight } from "@/interfaces";
+import { MovieLight, SerieLight } from "@/shared/interfaces";
 import { MovieCard } from "./MovieCard";
 import { SerieCard } from "./SerieCard";
 

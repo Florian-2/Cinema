@@ -106,3 +106,7 @@
 .alice-carousel__next-btn {
 	padding: 0 !important;
 }
+
+.rdp-vhidden {
+	@apply hidden;
+}

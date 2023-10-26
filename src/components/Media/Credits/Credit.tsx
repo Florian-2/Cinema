@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Credit as CreditInterface } from "@/interfaces";
+import { Credit as CreditInterface } from "@/shared/interfaces";
 
 type Props = {
 	person: CreditInterface;

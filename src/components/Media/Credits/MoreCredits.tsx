@@ -8,7 +8,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog";
-import { Credit as CreditInterface } from "@/interfaces";
+import { Credit as CreditInterface } from "@/shared/interfaces";
 import { Credit } from "./Credit";
 import { Button } from "@/components/ui/button";
 
