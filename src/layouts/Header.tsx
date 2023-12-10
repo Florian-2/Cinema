@@ -1,6 +1,16 @@
 "use client";
 
 import { ThemeSwitcher } from "@/components/Themes/ThemeSwitcher";
+import { Button } from "@/components/ui/button";
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 import {
 	NavigationMenu,
 	NavigationMenuItem,
@@ -8,12 +18,13 @@ import {
 	NavigationMenuList,
 	navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { SearchIcon } from "lucide-react";
 
 import Link from "next/link";
 
 export function Header() {
 	return (
-		<header className="max-w-screen-2xl mx-auto flex flex-col justify-center items-center gap-2 mt-3 sm:flex-row sm:justify-between">
+		<header className="w-full max-w-screen-2xl flex flex-col justify-center items-center gap-2 mt-3 sm:flex-row sm:justify-between">
 			<Link
 				href="/"
 				className="text-[27px] font-medium"
@@ -42,20 +53,35 @@ export function Header() {
 							<NavigationMenuLink className={navigationMenuTriggerStyle()}>Séries</NavigationMenuLink>
 						</Link>
 					</NavigationMenuItem>
-
-					<NavigationMenuItem>
-						<Link
-							href="/series"
-							legacyBehavior
-							passHref
-						>
-							<NavigationMenuLink className={navigationMenuTriggerStyle()}>Animations</NavigationMenuLink>
-						</Link>
-					</NavigationMenuItem>
 				</NavigationMenuList>
 			</NavigationMenu>
 
-			<ThemeSwitcher />
+			<div className="flex items-center gap-2">
+				<Dialog>
+					<DialogTrigger asChild>
+						<Button
+							variant="ghost"
+							className="p-2"
+						>
+							<SearchIcon
+								width={22}
+								height={22}
+							/>
+						</Button>
+					</DialogTrigger>
+					<DialogContent>
+						<DialogHeader>
+							<DialogTitle>Rechercher un film/série</DialogTitle>
+
+							<DialogDescription>
+								<Input />
+							</DialogDescription>
+						</DialogHeader>
+					</DialogContent>
+				</Dialog>
+
+				<ThemeSwitcher />
+			</div>
 		</header>
 	);
 }

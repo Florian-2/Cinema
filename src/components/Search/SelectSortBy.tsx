@@ -22,7 +22,13 @@ export function SelectSortBy({ onChange }: Props) {
 			<SelectContent>
 				<SelectGroup>
 					<SelectItem value="popularity.desc">Popularité +/-</SelectItem>
-					<SelectItem value="popularity.asc">Popularité -/+</SelectItem>
+					<SelectItem value="popularity.asc">
+						<span>
+							<span>
+								<span>Popularité </span>
+							</span>
+						</span>
+					</SelectItem>
 					<SelectItem value="vote_average.desc">Notes +/-</SelectItem>
 					<SelectItem value="vote_average.asc">Note -/+</SelectItem>
 					<SelectItem value="primary_release_date.desc">Date de sortie +/-</SelectItem>

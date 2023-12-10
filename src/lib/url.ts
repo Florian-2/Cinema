@@ -2,6 +2,7 @@ import { formSchemaType } from "@/shared/validator";
 
 export function convertToUrl(data: formSchemaType): URLSearchParams {
 	const searchParams = new URLSearchParams();
+
 	searchParams.append("sort_by", data.sortBy);
 
 	searchParams.append("primary_release_date.gte", data.fromDate.toJSON());

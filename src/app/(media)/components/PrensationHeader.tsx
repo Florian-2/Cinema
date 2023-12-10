@@ -1,4 +1,6 @@
-import { convertRuntime, formatDate } from "@/lib/time";
+import { convertRuntime } from "@/lib";
+import { format } from "date-fns";
+import { fr } from "date-fns/locale";
 
 type Props = {
 	title: string;
@@ -14,7 +16,7 @@ export function PresentationHeader({ title, runtime, releaseDate }: Props) {
 				{runtime && <span className="ml-2 text-sm align-middle font-normal">- {convertRuntime(runtime)}</span>}
 			</h1>
 
-			<p className="text-sm">{formatDate(releaseDate, "long")}</p>
+			<p className="text-sm">{format(new Date(releaseDate), "d MMMM yyyy", { locale: fr })}</p>
 		</div>
 	);
 }

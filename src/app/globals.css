@@ -102,6 +102,21 @@
 	}
 }
 
+@layer utilities {
+
+	/* Chrome, Safari and Opera */
+	.no-scrollbar::-webkit-scrollbar {
+		display: none;
+	}
+
+	.no-scrollbar {
+		-ms-overflow-style: none;
+		/* IE and Edge */
+		scrollbar-width: none;
+		/* Firefox */
+	}
+}
+
 .alice-carousel__prev-btn,
 .alice-carousel__next-btn {
 	padding: 0 !important;

@@ -25,17 +25,15 @@ export async function HeroSection() {
 	const imgUrl = `${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_PATH}/original/${movie.backdrop_path}`;
 
 	return (
-		<section className="relative rounded-3xl shadow-xl overflow-hidden">
-			<div className="h-80 sm:h-[400px]">
-				<Overlay>
-					<Image
-						src={imgUrl}
-						alt={movie.title}
-						fill
-						className="object-cover object-center-top"
-					/>
-				</Overlay>
-			</div>
+		<section className="flex-shrink-0 relative h-[300px] sm:h-[400px] rounded-3xl shadow-xl overflow-hidden">
+			<Overlay>
+				<Image
+					src={imgUrl}
+					alt={movie.title}
+					fill
+					className="object-cover object-center-top"
+				/>
+			</Overlay>
 
 			<div className="absolute bottom-10 z-30 w-full p-2 flex flex-col items-center gap-8">
 				<h2 className="text-2xl text-center font-medium text-white sm:text-3xl">{movie.title}</h2>

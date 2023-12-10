@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/layouts/Header";
 import { ThemeProvider } from "@/components/Themes/ThemeProvider";
+import Providers from "@/lib/Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,16 +15,18 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="fr">
-			<body className={`${inter.className} px-2`}>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="system"
-					enableSystem
-				>
-					<Header />
+			<body className={`${inter.className} px-2 h-screen flex flex-col items-center gap-12`}>
+				<Providers>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="system"
+						enableSystem
+					>
+						<Header />
 
-					<main className="flex flex-col gap-14 max-w-screen-2xl mx-auto mt-14">{children}</main>
-				</ThemeProvider>
+						<main className="h-full w-full max-w-screen-2xl flex flex-col gap-14">{children}</main>
+					</ThemeProvider>
+				</Providers>
 			</body>
 		</html>
 	);

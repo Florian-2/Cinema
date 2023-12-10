@@ -1,9 +1,10 @@
-import { SerieLight } from "@/shared/interfaces";
+import Link from "next/link";
 import Image from "next/image";
+import { format } from "date-fns";
+import { fr } from "date-fns/locale";
+import { SerieLight } from "@/shared/interfaces";
 import { Rating } from "./Rating";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { formatDate } from "@/lib/time";
 import { Overlay } from "./Overlay";
 
 type Props = {
@@ -31,7 +32,11 @@ export function SerieCard({ media, className }: Props) {
 
 			<div className="w-full absolute bottom-0 z-20 p-4 text-white bg-gradient-overlay">
 				<h3 className="text-2xl font-medium">{media.name}</h3>
-				<p className="text-sm mb-5">{formatDate(media.first_air_date, "medium")}</p>
+				{media.first_air_date && (
+					<p className="text-sm mb-5">
+						{format(new Date(media.first_air_date), "d LLL yyyy", { locale: fr })}
+					</p>
+				)}
 
 				<div className="flex justify-between">
 					<Rating

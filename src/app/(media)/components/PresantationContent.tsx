@@ -5,5 +5,5 @@ type Props = {
 };
 
 export function PresentationContent({ children }: Props) {
-	return <div className="w-full min-h-full flex flex-col gap-5 ">{children}</div>;
+	return <div className="w-full min-h-full flex flex-col justify-center gap-5 ">{children}</div>;
 }

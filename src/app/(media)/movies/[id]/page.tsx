@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
 import { Rating } from "@/components/Media/MediaCard/Rating";
 import { Trailer } from "@/components/Media/Trailer";
 import { Overlay } from "@/components/Media/MediaCard";
-import { Movie, ReleaseDates } from "@/shared/interfaces";
+import { KeyString, Movie, ReleaseDates } from "@/shared/interfaces";
 import { getMedias } from "@/services";
 import { CreditsList } from "@/components/Media/Credits";
 import { SkeletonCredit } from "@/components/Skeletons/SkeletonCredits";
@@ -18,26 +18,27 @@ import { SectionContainer } from "../../components/SectionContainer";
 import { Presentation } from "../../components/Prensations";
 import { PresentationContent } from "../../components/PresantationContent";
 import { PresentationHeader } from "../../components/PrensationHeader";
+import { getLocaleReleaseDate } from "@/lib/utils";
+import { TabsMovie } from "@/components/Media/Section/Informations";
 
 export default async function MoviesPage({ params }: { params: { id: string } }) {
 	let movie: Movie;
-	let trailer: { key: string };
+	let trailer: KeyString;
 	let releaseDatesFr: string | Date;
 
 	try {
-		const data = await Promise.all([
+		const [movieData, trailerData, releaseData] = await Promise.all([
 			getMedias<Movie>(`/movie/${params.id}`),
-			getMedias<{ results: { key: string }[] }>(`/movie/${params.id}/videos`),
+			getMedias<{ results: KeyString[] }>(`/movie/${params.id}/videos`),
 			getMedias<{ results: ReleaseDates[] }>(`/movie/${params.id}/release_dates`),
 		]);
 
-		movie = data[0];
-		trailer = data[1].results[0];
-
-		const releaseDates = data[2].results.find((date) => date.iso_3166_1 === "FR");
-		releaseDatesFr = releaseDates?.release_dates[0].release_date || movie.release_date;
+		movie = movieData;
+		trailer = trailerData.results[0];
+		releaseDatesFr = getLocaleReleaseDate(releaseData.results) || movie.release_date;
 	} catch (error) {
 		notFound();
+		// redirect("/");
 	}
 
 	return (
@@ -102,6 +103,14 @@ export default async function MoviesPage({ params }: { params: { id: string } })
 						type="movie"
 					/>
 				</Suspense>
+			</section>
+
+			<section>
+				<HeaderSection>
+					<TitleSection>Informations</TitleSection>
+				</HeaderSection>
+
+				<TabsMovie movie={movie} />
 			</section>
 
 			<SectionRecommendations

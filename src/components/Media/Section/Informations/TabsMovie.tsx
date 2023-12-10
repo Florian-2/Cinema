@@ -1,53 +1,30 @@
+import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Movie } from "@/shared/interfaces";
-import { formatCurrency } from "@/lib/number";
-import { getMedias } from "@/services";
+import { formatCurrency } from "@/lib";
 import { ExternalLink } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import { ProductionsCompanies } from "../../Companies";
+import { BoxOffice } from "../../BoxOffice";
 
 type Props = {
 	movie: Movie;
 };
 
-interface Provider {
-	[key: string]: {
-		link: string;
-		rent: {
-			logo_path: string;
-			provider_id: number;
-			provider_name: string;
-			display_priority: number;
-		}[];
-		buy: [
-			{
-				logo_path: string;
-				provider_id: number;
-				provider_name: string;
-				display_priority: number;
-			}
-		];
-	};
-}
-
 export async function TabsMovie({ movie }: Props) {
-	// const { results } = await getMedias<{ results: Provider[] }>(`/movie/${movie.id}/watch/provider`);
 	const productionCountries = movie.production_countries.map((country) => country.name).join(", ");
-	const productionCompanies = movie.production_companies.map((company) => company.name).join(", ");
 	const languages = movie.spoken_languages.map((lang) => lang.name).join(", ");
 
-	// console.log(results);
-
 	return (
-		<Tabs defaultValue="informations">
+		<Tabs defaultValue="details">
 			<TabsList>
-				<TabsTrigger value="informations">À savoir</TabsTrigger>
-				<TabsTrigger value="providers">Où regarder ?</TabsTrigger>
+				<TabsTrigger value="details">Détails</TabsTrigger>
+				<TabsTrigger value="productions">Productions</TabsTrigger>
+				<TabsTrigger value="box-office">Box-office</TabsTrigger>
 			</TabsList>
 
-			<TabsContent value="informations">
-				<div className="flex flex-col gap-3 p-4 bg-zinc-100 rounded-lg">
-					<ul>
+			<TabsContent value="details">
+				<div className="flex flex-col gap-3">
+					<ul className="space-y-1">
 						<li>
 							<span className="font-medium">Titre original</span>: {movie.original_title}
 						</li>
@@ -75,35 +52,40 @@ export async function TabsMovie({ movie }: Props) {
 							<span className="font-medium">Langue{movie.spoken_languages.length > 1 && "s"}</span>:{" "}
 							{languages}
 						</li>
-					</ul>
-
-					<hr />
-
-					<ul>
-						<li>
-							<span className="font-medium">Sociétés de production</span>: {productionCompanies}
-						</li>
-						<li>
-							<span className="font-medium">Budget</span>: {formatCurrency(movie.budget)}
-						</li>
-						<li>
-							<span className="font-medium">Revenu</span>: {formatCurrency(movie.revenue)}
+						{movie.imdb_id && (
+							<li className="flex gap-1">
+								<span className="font-medium">imdb: </span>
+								<Link
+									target="_blank"
+									href={`https://www.imdb.com/title/${movie.imdb_id}`}
+									className="flex items-center gap-2 underline"
+								>
+									{movie.original_title}
+									<ExternalLink size={15} />
+								</Link>
+							</li>
+						)}
+						<li className="flex gap-1">
+							<span className="font-medium">tmdb: </span>
+							<Link
+								target="_blank"
+								href={`https://www.themoviedb.org/movie/${movie.id}?langue=fr`}
+								className="flex items-center gap-2 underline"
+							>
+								{movie.original_title}
+								<ExternalLink size={15} />
+							</Link>
 						</li>
 					</ul>
 				</div>
 			</TabsContent>
-			<TabsContent value="providers">
-				<ul>
-					<li>
-						<span className="font-medium">Sociétés de production</span>: {productionCompanies}
-					</li>
-					<li>
-						<span className="font-medium">Budget</span>: {formatCurrency(movie.budget)}
-					</li>
-					<li>
-						<span className="font-medium">Revenu</span>: {formatCurrency(movie.revenue)}
-					</li>
-				</ul>
+
+			<TabsContent value="productions">
+				<ProductionsCompanies movie={movie} />
+			</TabsContent>
+
+			<TabsContent value="box-office">
+				<BoxOffice movie={movie} />
 			</TabsContent>
 		</Tabs>
 	);

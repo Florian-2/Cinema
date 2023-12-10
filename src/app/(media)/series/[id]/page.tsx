@@ -18,21 +18,22 @@ import { Presentation } from "../../components/Prensations";
 import { Thumbnail } from "@/components/Media/Thumbnail";
 import { PresentationHeader } from "../../components/PrensationHeader";
 import { PresentationContent } from "../../components/PresantationContent";
+import { KeyString } from "@/shared/interfaces";
 
 export default async function SeriePage({ params }: { params: { id: string } }) {
 	let serie: Serie;
-	let trailer: { key: string };
+	let trailer: KeyString;
 
 	try {
-		const data = await Promise.all([
+		const [serieData, trailerData] = await Promise.all([
 			getMedias<Serie>(`/tv/${params.id}`),
-			getMedias<{ results: { key: string }[] }>(`/tv/${params.id}/videos`, [
+			getMedias<{ results: KeyString[] }>(`/tv/${params.id}/videos`, [
 				{ key: "include_video_language", value: "fr" },
 			]),
 		]);
 
-		serie = data[0];
-		trailer = data[1].results[0];
+		serie = serieData;
+		trailer = trailerData.results[0];
 	} catch (error) {
 		notFound();
 	}
