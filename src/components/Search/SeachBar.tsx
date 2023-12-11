@@ -2,52 +2,108 @@
 
 import { useAction } from "next-safe-action/hook";
 
-import { SearchIcon } from "lucide-react";
+import { Loader2, PlusCircle, SearchIcon } from "lucide-react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { searchMedia } from "@/actions/searchMedia";
+import { searchMedia, MovieOrSerie } from "@/actions/searchMedia";
+import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
+import { useDebounce } from "@/hooks/useDebounce";
+import { ChangeEvent, useEffect, useState } from "react";
+import { SearchResults } from "./SearchResult";
 
 export function Search() {
-	const { execute, result } = useAction(searchMedia);
+	const [searchTerm, setSeachTerm] = useState("");
+	const [category, setCategory] = useState<MovieOrSerie>("movie");
+	const debounceSearchTerm = useDebounce(searchTerm, 500);
+	const { execute, result, status } = useAction(searchMedia);
 
-	function search(formData: FormData) {
-		const inputValue = formData.get("search") as string;
-
-		if (!inputValue) return;
-
-		execute({ category: "movie", query: inputValue });
+	function search() {
+		if (searchTerm.length >= 2) {
+			execute({ category, query: searchTerm });
+		}
 	}
 
-	return (
-		<form action={search}>
-			<div
-				className={
-					"flex items-center gap-1 rounded-md border p-1 ring-offset-background focus-within:ring-1 focus-within:ring-ring focus-within:ring-offset-2"
-				}
-			>
-				<Button
-					variant="ghost"
-					className="px-3 cursor-pointer"
-					formAction={search}
-				>
-					<SearchIcon
-						width={20}
-						height={20}
-					/>
-				</Button>
+	useEffect(() => {
+		search();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [debounceSearchTerm, category]);
 
+	const searchTermChange = (event: ChangeEvent<HTMLInputElement>) => setSeachTerm(event.target.value);
+
+	const groupValueChange = (value: string) => setCategory(value as MovieOrSerie);
+
+	return (
+		<form
+			action={search}
+			className="space-y-3 mt-6"
+		>
+			<div className="flex gap-2">
 				<Input
 					name="search"
 					placeholder="Rechercher..."
-					className="border-none bg-transparent p-0 placeholder:text-muted-foreground focus-visible:ring-transparent focus-visible:bg-transparent"
+					className="text-base py-3"
+					value={searchTerm}
+					onChange={searchTermChange}
 				/>
+
+				<Button
+					variant="outline"
+					className="p-2"
+					disabled={status === "executing"}
+				>
+					{status === "executing" ? (
+						<Loader2
+							width={22}
+							height={22}
+							className="animate-spin"
+						/>
+					) : (
+						<SearchIcon
+							width={22}
+							height={22}
+						/>
+					)}
+				</Button>
 			</div>
 
-			<div>
-				{result.data?.map((media) => (
-					<p key={media.id}>{media.id}</p>
-				))}
-			</div>
+			<ToggleGroup
+				value={category}
+				onValueChange={groupValueChange}
+				type="single"
+				variant="outline"
+				className="justify-start gap-2"
+			>
+				<ToggleGroupItem
+					value="movie"
+					className="gap-1 text-muted-foreground"
+				>
+					Film
+					<PlusCircle
+						width={16}
+						height={16}
+					/>
+				</ToggleGroupItem>
+
+				<ToggleGroupItem
+					value="tv"
+					className="gap-1 text-muted-foreground"
+				>
+					Serie
+					<PlusCircle
+						width={16}
+						height={16}
+					/>
+				</ToggleGroupItem>
+			</ToggleGroup>
+
+			{result.serverError && searchTerm.length >= 2 && <p>Aucun résultat</p>}
+
+			{result.data && searchTerm.length >= 2 && (
+				<SearchResults
+					type={category}
+					results={result.data}
+				/>
+			)}
 		</form>
 	);
 }

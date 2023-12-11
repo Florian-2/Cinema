@@ -7,8 +7,11 @@ import { z } from "zod";
 
 type MediaResult<T> = T extends "movie" ? MovieLight[] : T extends "tv" ? SerieLight[] : never;
 
+const movieOrSerie = z.union([z.literal("movie"), z.literal("tv")]);
+export type MovieOrSerie = z.infer<typeof movieOrSerie>;
+
 const searchMediaSchema = z.object({
-	category: z.union([z.literal("movie"), z.literal("tv")]),
+	category: movieOrSerie,
 	query: z.string().min(2),
 });
 
@@ -16,6 +19,8 @@ export const searchMedia = action(
 	searchMediaSchema,
 	async ({ category, query }): Promise<MediaResult<typeof category>> => {
 		try {
+			console.log(1, "searchMediaAction");
+
 			const params = [{ key: "query", value: query }];
 			const media = await getMedias<{ results: MovieLight[] | SerieLight[] }>(`/search/${category}`, params);
 
@@ -25,7 +30,8 @@ export const searchMedia = action(
 
 			return media.results;
 		} catch (error) {
-			throw new ActionError("Echec");
+			const e = error as Error;
+			throw new ActionError(e.message);
 		}
 	}
 );

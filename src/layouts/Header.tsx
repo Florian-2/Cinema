@@ -1,5 +1,6 @@
 "use client";
 
+import { Search } from "@/components/Search/SeachBar";
 import { ThemeSwitcher } from "@/components/Themes/ThemeSwitcher";
 import { Button } from "@/components/ui/button";
 import {
@@ -69,14 +70,9 @@ export function Header() {
 							/>
 						</Button>
 					</DialogTrigger>
-					<DialogContent>
-						<DialogHeader>
-							<DialogTitle>Rechercher un film/série</DialogTitle>
 
-							<DialogDescription>
-								<Input />
-							</DialogDescription>
-						</DialogHeader>
+					<DialogContent className="max-w-2xl">
+						<Search />
 					</DialogContent>
 				</Dialog>
 
