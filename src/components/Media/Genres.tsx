@@ -10,7 +10,7 @@ export function Genres({ genres }: Props) {
 			{genres.map((genre) => (
 				<Badge
 					key={genre.id}
-					className="bg-white text-black"
+					className="bg-white text-black text-center"
 				>
 					{genre.name}
 				</Badge>

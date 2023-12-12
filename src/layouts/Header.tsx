@@ -1,17 +1,9 @@
 "use client";
 
-import { Search } from "@/components/Search/SeachBar";
+import { SearchBar } from "@/components/Search/SeachBar";
 import { ThemeSwitcher } from "@/components/Themes/ThemeSwitcher";
 import { Button } from "@/components/ui/button";
-import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import {
 	NavigationMenu,
 	NavigationMenuItem,
@@ -72,7 +64,7 @@ export function Header() {
 					</DialogTrigger>
 
 					<DialogContent className="max-w-2xl">
-						<Search />
+						<SearchBar />
 					</DialogContent>
 				</Dialog>
 

@@ -54,25 +54,25 @@ export async function TabsMovie({ movie }: Props) {
 						</li>
 						{movie.imdb_id && (
 							<li className="flex gap-1">
-								<span className="font-medium">imdb: </span>
+								<span className="font-medium">IMDb: </span>
 								<Link
 									target="_blank"
 									href={`https://www.imdb.com/title/${movie.imdb_id}`}
 									className="flex items-center gap-2 underline"
 								>
-									{movie.original_title}
+									{movie.title}
 									<ExternalLink size={15} />
 								</Link>
 							</li>
 						)}
 						<li className="flex gap-1">
-							<span className="font-medium">tmdb: </span>
+							<span className="font-medium">TMDb: </span>
 							<Link
 								target="_blank"
 								href={`https://www.themoviedb.org/movie/${movie.id}?langue=fr`}
 								className="flex items-center gap-2 underline"
 							>
-								{movie.original_title}
+								{movie.title}
 								<ExternalLink size={15} />
 							</Link>
 						</li>

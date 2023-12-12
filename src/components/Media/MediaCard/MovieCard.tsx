@@ -16,6 +16,8 @@ export function MovieCard({ media, className }: Props) {
 	const link = `/movies/${media.id}`;
 	const backgroundImg = `${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_PATH}/w500${media.poster_path}`;
 
+	console.log(media.vote_average);
+
 	return (
 		<article className={`h-[400px] relative rounded-3xl overflow-hidden ${className ? className : ""}`}>
 			<Overlay>
@@ -30,17 +32,21 @@ export function MovieCard({ media, className }: Props) {
 				)}
 			</Overlay>
 
-			<div className="w-full absolute bottom-0 z-20 p-4 text-white bg-gradient-overlay">
-				<h3 className="text-2xl font-medium">{media.title}</h3>
-				{media.release_date && (
-					<p className="text-sm mb-5">{format(new Date(media.release_date), "d LLL yyyy", { locale: fr })}</p>
-				)}
+			<div className="w-full absolute bottom-0 space-y-5 z-20 p-4 text-white bg-gradient-overlay">
+				<div>
+					<h3 className="text-2xl font-medium">{media.title}</h3>
+					{media.release_date && (
+						<p className="text-sm">{format(new Date(media.release_date), "d LLL yyyy", { locale: fr })}</p>
+					)}
+				</div>
 
-				<div className="flex justify-between">
-					<Rating
-						rating={media.vote_average}
-						sizeIcon={30}
-					/>
+				<div className={`flex ${media.vote_average ? "justify-between" : "justify-end"}`}>
+					{media.vote_average && (
+						<Rating
+							rating={media.vote_average}
+							sizeIcon={30}
+						/>
+					)}
 
 					<Button
 						asChild

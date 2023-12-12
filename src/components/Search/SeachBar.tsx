@@ -1,17 +1,16 @@
 "use client";
 
-import { useAction } from "next-safe-action/hook";
-
-import { Loader2, PlusCircle, SearchIcon } from "lucide-react";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { searchMedia, MovieOrSerie } from "@/actions/searchMedia";
-import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
-import { useDebounce } from "@/hooks/useDebounce";
 import { ChangeEvent, useEffect, useState } from "react";
+import { useAction } from "next-safe-action/hook";
+import { useDebounce } from "@/hooks/useDebounce";
+import { searchMedia, MovieOrSerie } from "@/actions/searchMedia";
+import { PlusCircle } from "lucide-react";
+import { Input } from "../ui/input";
+import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
 import { SearchResults } from "./SearchResult";
+import { SearchButton } from "./ui/SearchButton";
 
-export function Search() {
+export function SearchBar() {
 	const [searchTerm, setSeachTerm] = useState("");
 	const [category, setCategory] = useState<MovieOrSerie>("movie");
 	const debounceSearchTerm = useDebounce(searchTerm, 500);
@@ -46,24 +45,7 @@ export function Search() {
 					onChange={searchTermChange}
 				/>
 
-				<Button
-					variant="outline"
-					className="p-2"
-					disabled={status === "executing"}
-				>
-					{status === "executing" ? (
-						<Loader2
-							width={22}
-							height={22}
-							className="animate-spin"
-						/>
-					) : (
-						<SearchIcon
-							width={22}
-							height={22}
-						/>
-					)}
-				</Button>
+				<SearchButton isLoading={status === "executing"} />
 			</div>
 
 			<ToggleGroup

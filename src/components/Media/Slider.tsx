@@ -67,8 +67,8 @@ export function Slider({ data }: { data: JSX.Element[] }) {
 	return (
 		<div className="relative">
 			<AliceCarousel
-				autoPlay
-				autoPlayInterval={3000}
+				// autoPlay
+				// autoPlayInterval={3000}
 				mouseTracking
 				items={data}
 				responsive={responsive}

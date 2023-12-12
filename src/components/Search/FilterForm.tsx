@@ -2,22 +2,28 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { addMonths, subMonths } from "date-fns";
+import { addMonths } from "date-fns";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Button } from "../ui/button";
 import { SelectSortBy } from "./SelectSortBy";
 import { DatePicker } from "./DatePicker";
 import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "../ui/checkbox";
-import { genres } from "@/shared/genres";
+import { Genre } from "@/shared/genres";
 import { SliderRange } from "../ui/sliderRange";
 import { Slider } from "../ui/slider";
 import { formSchema, formSchemaType } from "@/shared/validator";
 import { convertToUrl } from "@/lib/url";
 import { usePathname, useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
+import { MovieOrSerie } from "@/actions/searchMedia";
 
-export function FilterForm() {
+type Props = {
+	type: MovieOrSerie;
+	genres: Genre[];
+};
+
+export function FilterForm({ type, genres }: Props) {
 	const router = useRouter();
 	const pathname = usePathname();
 	const form = useForm<formSchemaType>({
@@ -25,10 +31,8 @@ export function FilterForm() {
 	});
 
 	async function onSubmit(data: formSchemaType) {
-		const urlWithFilter = convertToUrl(data);
+		const urlWithFilter = convertToUrl(type, data);
 		router.push(`${pathname}?${urlWithFilter.toString()}`);
-
-		// return new Promise((res) => setTimeout(() => res(true), 3000));
 	}
 
 	return (

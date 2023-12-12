@@ -4,11 +4,10 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { SearchParams, fetchMediaPagination } from "@/services";
 import { MovieLight } from "@/shared/interfaces";
 import { MediaCard } from "@/components/Media/MediaCard";
-import { FilterForm } from "@/components/Search/FilterForm";
-import { FilterFormMobile } from "@/components/Search/FilterFormMobile";
 import { Loader } from "@/components/ui/loader";
-import { MoreResults } from "@/components/Search/MoreResults";
+import { MoreResults } from "@/components/Search/ui/MoreResults";
 import { ResetSearch } from "@/components/Search/ResetSearch";
+import { Form } from "@/components/Search/Form";
 
 type Params = {
 	searchParams: {
@@ -48,13 +47,7 @@ export default function MoviesPage({ searchParams }: Params) {
 
 	return (
 		<section className="grid grid-cols-1 gap-14 md:grid-cols-20/100">
-			<div className="mx-auto w-52 md:hidden">
-				<FilterFormMobile />
-			</div>
-
-			<div className="hidden md:inline-flex">
-				<FilterForm />
-			</div>
+			<Form type="movie" />
 
 			<div className="max-h-screen overflow-y-auto no-scrollbar mb-5 flex-grow grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 				{isError && (

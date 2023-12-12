@@ -6,7 +6,7 @@ type Props = {
 
 export function SectionContainer({ children }: Props) {
 	return (
-		<section className="h-full flex flex-col relative shadow-xl rounded-2xl overflow-hidden md:min-h-[500px]">
+		<section className="flex flex-shrink-0 relative shadow-xl rounded-2xl overflow-hidden min-h-[300px]">
 			{children}
 		</section>
 	);

@@ -2,6 +2,7 @@ import { Credit as CreditInterface } from "@/shared/interfaces";
 import { getMedias } from "@/services/media.services";
 import { Credit } from "./Credit";
 import { MoreCredits } from "./MoreCredits";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 type Props = {
 	mediaId: number;
@@ -18,15 +19,21 @@ export async function CreditsList({ mediaId, type }: Props) {
 	}
 
 	return (
-		<div className="pb-2 flex items-center gap-5 justify-between overflow-x-auto">
-			{credits.slice(0, 10).map((credit) => (
-				<Credit
-					key={credit.id}
-					person={credit}
-				/>
-			))}
+		<ScrollArea
+			className="whitespace-nowrap rounded-md"
+			type="always"
+		>
+			<div className="pb-2 flex items-center justify-between gap-5">
+				{credits.slice(0, 10).map((credit) => (
+					<Credit
+						key={credit.id}
+						person={credit}
+					/>
+				))}
 
-			{credits.length > 10 && <MoreCredits credits={credits} />}
-		</div>
+				{credits.length > 10 && <MoreCredits credits={credits} />}
+			</div>
+			<ScrollBar orientation="horizontal" />
+		</ScrollArea>
 	);
 }
