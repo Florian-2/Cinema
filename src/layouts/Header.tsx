@@ -1,6 +1,7 @@
 "use client";
 
 import { SearchBar } from "@/components/Search/SeachBar";
+import { Search } from "@/components/Search/ui";
 import { ThemeSwitcher } from "@/components/Themes/ThemeSwitcher";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
@@ -50,23 +51,7 @@ export function Header() {
 			</NavigationMenu>
 
 			<div className="flex items-center gap-2">
-				<Dialog>
-					<DialogTrigger asChild>
-						<Button
-							variant="ghost"
-							className="p-2"
-						>
-							<SearchIcon
-								width={22}
-								height={22}
-							/>
-						</Button>
-					</DialogTrigger>
-
-					<DialogContent className="max-w-2xl">
-						<SearchBar />
-					</DialogContent>
-				</Dialog>
+				<Search />
 
 				<ThemeSwitcher />
 			</div>

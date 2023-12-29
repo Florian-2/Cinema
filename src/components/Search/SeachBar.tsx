@@ -10,7 +10,11 @@ import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
 import { SearchResults } from "./SearchResult";
 import { SearchButton } from "./ui/SearchButton";
 
-export function SearchBar() {
+type Props = {
+	onOpenChange: () => void;
+};
+
+export function SearchBar({ onOpenChange }: Props) {
 	const [searchTerm, setSeachTerm] = useState("");
 	const [category, setCategory] = useState<MovieOrSerie>("movie");
 	const debounceSearchTerm = useDebounce(searchTerm, 500);
@@ -81,10 +85,12 @@ export function SearchBar() {
 			{result.serverError && searchTerm.length >= 2 && <p>Aucun résultat</p>}
 
 			{result.data && searchTerm.length >= 2 && (
-				<SearchResults
-					type={category}
-					results={result.data}
-				/>
+				<div onClick={onOpenChange}>
+					<SearchResults
+						type={category}
+						results={result.data}
+					/>
+				</div>
 			)}
 		</form>
 	);

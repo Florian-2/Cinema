@@ -15,7 +15,6 @@ export async function PopularMovies() {
 			key={media.id}
 			type="movie"
 			media={media}
-			className="mx-4"
 		/>
 	));
 

@@ -1,11 +1,9 @@
 "use server";
 
+import { z } from "zod";
 import { ActionError, action } from "@/lib/safe-action";
 import { getMedias } from "@/services";
 import { MovieLight, SerieLight } from "@/shared/interfaces";
-import { z } from "zod";
-
-type MediaResult<T> = T extends "movie" ? MovieLight[] : T extends "tv" ? SerieLight[] : never;
 
 const movieOrSerie = z.union([z.literal("movie"), z.literal("tv")]);
 export type MovieOrSerie = z.infer<typeof movieOrSerie>;
@@ -17,12 +15,13 @@ const searchMediaSchema = z.object({
 
 export const searchMedia = action(
 	searchMediaSchema,
-	async ({ category, query }): Promise<MediaResult<typeof category>> => {
+	async <C extends MovieOrSerie>({ category, query }: { category: C; query: string }) => {
 		try {
-			console.log(1, "searchMediaAction");
-
 			const params = [{ key: "query", value: query }];
-			const media = await getMedias<{ results: MovieLight[] | SerieLight[] }>(`/search/${category}`, params);
+			const media = await getMedias<{ results: C extends "movie" ? MovieLight[] : SerieLight[] }>(
+				`/search/${category}`,
+				params
+			);
 
 			if (!media.results.length) {
 				throw new ActionError("Aucun résultat...");

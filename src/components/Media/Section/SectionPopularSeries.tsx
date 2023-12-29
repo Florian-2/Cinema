@@ -24,7 +24,6 @@ export async function PopularSeries() {
 			key={media.id}
 			type="tv"
 			media={media}
-			className="mx-4"
 		/>
 	));
 

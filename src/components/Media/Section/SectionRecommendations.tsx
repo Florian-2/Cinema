@@ -35,7 +35,6 @@ export async function SectionRecommendations({ media, type }: Props) {
 			key={media.id}
 			type={type}
 			media={media}
-			className="mx-4"
 		/>
 	));
 

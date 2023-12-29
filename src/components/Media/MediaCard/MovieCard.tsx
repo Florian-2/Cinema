@@ -16,8 +16,6 @@ export function MovieCard({ media, className }: Props) {
 	const link = `/movies/${media.id}`;
 	const backgroundImg = `${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_PATH}/w500${media.poster_path}`;
 
-	console.log(media.vote_average);
-
 	return (
 		<article className={`h-[400px] relative rounded-3xl overflow-hidden ${className ? className : ""}`}>
 			<Overlay>

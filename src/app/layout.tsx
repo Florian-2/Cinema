@@ -14,8 +14,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="fr">
-			<body className={`${inter.className} px-2 h-screen flex flex-col items-center gap-12`}>
+		<html
+			lang="fr"
+			suppressHydrationWarning
+		>
+			<body className={`${inter.className} px-2 min-h-screen flex flex-col items-center gap-12 mb-4`}>
 				<Providers>
 					<ThemeProvider
 						attribute="class"
