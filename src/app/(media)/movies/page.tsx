@@ -45,6 +45,8 @@ export default function MoviesPage({ searchParams }: Params) {
 	const nbOfResults = data?.pages.slice(-1).at(0)?.results.length;
 	const pages = data?.pages;
 
+	console.log(data?.pages);
+
 	return (
 		<section className="grid grid-cols-1 gap-14 md:grid-cols-20/100">
 			<Form type="movie" />

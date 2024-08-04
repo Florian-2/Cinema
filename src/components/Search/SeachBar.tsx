@@ -1,9 +1,9 @@
 "use client";
 
 import { ChangeEvent, useEffect, useState } from "react";
-import { useAction } from "next-safe-action/hook";
+import { useAction } from "next-safe-action/hooks";
 import { useDebounce } from "@/hooks/useDebounce";
-import { searchMedia, MovieOrSerie } from "@/actions/searchMedia";
+import { searchMediaAction, MovieOrSerie } from "@/actions/searchMedia";
 import { PlusCircle } from "lucide-react";
 import { Input } from "../ui/input";
 import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
@@ -18,7 +18,7 @@ export function SearchBar({ onOpenChange }: Props) {
 	const [searchTerm, setSeachTerm] = useState("");
 	const [category, setCategory] = useState<MovieOrSerie>("movie");
 	const debounceSearchTerm = useDebounce(searchTerm, 500);
-	const { execute, result, status } = useAction(searchMedia);
+	const { execute, result, status } = useAction(searchMediaAction);
 
 	function search() {
 		if (searchTerm.length >= 2) {

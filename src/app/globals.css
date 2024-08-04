@@ -114,13 +114,13 @@
 		scrollbar-width: none;
 		/* Firefox */
 	}
-}
 
-.alice-carousel__prev-btn,
-.alice-carousel__next-btn {
-	padding: 0 !important;
-}
+	.alice-carousel__prev-btn,
+	.alice-carousel__next-btn {
+		padding: 0 !important;
+	}
 
-.rdp-vhidden {
-	@apply hidden;
+	.rdp-vhidden {
+		@apply hidden;
+	}
 }

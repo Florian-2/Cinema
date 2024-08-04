@@ -1,10 +1,8 @@
 "use client";
 
-import { SearchBar } from "@/components/Search/SeachBar";
 import { Search } from "@/components/Search/ui";
 import { ThemeSwitcher } from "@/components/Themes/ThemeSwitcher";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+
 import {
 	NavigationMenu,
 	NavigationMenuItem,
@@ -12,8 +10,6 @@ import {
 	NavigationMenuList,
 	navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { SearchIcon } from "lucide-react";
-
 import Link from "next/link";
 
 export function Header() {

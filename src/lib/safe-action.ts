@@ -2,7 +2,7 @@ import { createSafeActionClient } from "next-safe-action";
 
 export class ActionError extends Error {}
 
-export const action = createSafeActionClient({
+export const actionClient = createSafeActionClient({
 	handleReturnedServerError(e) {
 		if (e instanceof ActionError) {
 			return {
